@@ -1,6 +1,8 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'maven-publish'
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -23,6 +25,37 @@ android {
         }
     }
 
+}
+
+def getVersionName = { ->
+    return "1.0.1"
+}
+
+def getArtificatId = { ->
+    "servicelocatorsample"
+}
+
+publishing {
+    publications {
+        bar(MavenPublication) {
+            //groupId 'com.enefce.libraries'
+            artifactId getArtificatId()
+            version getVersionName()
+            artifact("$buildDir/outputs/aar/${getArtificatId()}-release.aar")
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/roger8b/AndroidLibrarySample")
+
+            credentials {
+                username = "aaaaaaa"
+                password = "aaaaaaa"
+            }
+        }
+    }
 }
 
 dependencies {
