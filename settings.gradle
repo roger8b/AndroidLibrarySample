@@ -1,0 +1,2 @@
+include ':app', ':servicelocatorsample'
+rootProject.name='AndroidLibrarySample'
